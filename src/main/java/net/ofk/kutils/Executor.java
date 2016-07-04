@@ -1,4 +1,4 @@
-package net.ofk.utils;
+package net.ofk.kutils;
 
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;

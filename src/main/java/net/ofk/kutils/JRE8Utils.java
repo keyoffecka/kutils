@@ -1,4 +1,4 @@
-package net.ofk.utils;
+package net.ofk.kutils;
 
 /**
  * Utilities to make use of JRE8 features

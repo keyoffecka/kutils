@@ -1,4 +1,4 @@
-package net.ofk.utils
+package net.ofk.kutils
 
 import org.junit.Assert
 import org.junit.Test

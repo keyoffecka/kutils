@@ -1,4 +1,4 @@
-package net.ofk.utils
+package net.ofk.kutils
 
 import java.io.IOException
 
@@ -31,7 +31,7 @@ class Auto private constructor() {
   private val resources = arrayListOf<AutoCloseable>()
 
   /**
-   * Registered an auto-closable resource of type T
+   * Registers an auto-closable resource of type T
    * within the current Auto.close block.
    */
   fun <T : AutoCloseable> T.open(): T {
