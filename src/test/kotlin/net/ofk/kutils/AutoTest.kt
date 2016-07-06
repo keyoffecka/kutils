@@ -3,38 +3,35 @@ package net.ofk.kutils
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
-import java.io.ByteArrayInputStream
 import java.io.IOException
 
 class AutoTest {
   @Test
   fun test() {
-    var s: AutoCloseable = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
+    var s = Mockito.mock(AutoCloseable::class.java)
+    var s2 = Mockito.mock(AutoCloseable::class.java)
+    var s3 = Mockito.mock(AutoCloseable::class.java)
+    val e = Exception()
+    val e2 = Exception()
 
     Auto.close {
-      s.open()
+      s = Mockito.mock(AutoCloseable::class.java).open()
     }
 
     Mockito.verify(s).close()
 
-    s = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
-    var s2: AutoCloseable = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
-
     Auto.close {
-      s.open()
-      s2.open()
+      s = Mockito.mock(AutoCloseable::class.java).open()
+      s2 = Mockito.spy(AutoCloseable::class.java).open()
     }
 
     var o = Mockito.inOrder(s, s2);
     o.verify(s2).close()
     o.verify(s).close()
 
-    s = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
-
-    val e = Exception()
     try {
       Auto.close {
-        s.open()
+        s = Mockito.mock(AutoCloseable::class.java).open()
         throw e
       }
     } catch(ex: Exception) {
@@ -43,13 +40,10 @@ class AutoTest {
 
     Mockito.verify(s).close()
 
-    s = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
-    s2 = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
-
     try {
       Auto.close {
-        s.open()
-        s2.open()
+        s = Mockito.mock(AutoCloseable::class.java).open()
+        s2 = Mockito.mock(AutoCloseable::class.java).open()
         throw e
       }
     } catch(ex: Exception) {
@@ -60,10 +54,8 @@ class AutoTest {
     o.verify(s2).close()
     o.verify(s).close()
 
-    s = Mockito.spy(ByteArrayInputStream("test".toByteArray()))
-    s2 = Mockito.mock(AutoCloseable::class.java)
-    val s3 = Mockito.mock(AutoCloseable::class.java)
-    val e2 = Exception()
+    s = Mockito.mock(AutoCloseable::class.java)
+    s3 = Mockito.mock(AutoCloseable::class.java)
 
     Mockito.doThrow(e).`when`(s2).close()
     Mockito.doThrow(e2).`when`(s3).close()

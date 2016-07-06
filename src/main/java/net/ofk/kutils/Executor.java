@@ -38,13 +38,17 @@ public class Executor {
   }
 
   /**
-   * Wraps executable into runnable.
+   * Wraps callable into supplier.
    * Checked exceptions will be wrapped into unchecked UndeclaredThrowableException.
    */
   public <T> Supplier<T> toSupplier(final Callable<T> provider) {
     return () -> this.provide(provider);
   }
 
+  /**
+   * Wraps processor into consumer.
+   * Checked exceptions will be wrapped into unchecked UndeclaredThrowableException.
+   */
   public <T> Consumer<T> toConsumer(final Executor.Processor<T> processor) {
     return param -> this.convert(p -> {
       processor.process(p);

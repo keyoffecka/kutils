@@ -20,8 +20,8 @@ class Auto private constructor() {
      */
     fun <R> close(register: Auto.() -> R): R {
       val manager = Auto()
-      try {
-        return manager.register()
+      return try {
+        manager.register()
       } finally {
         manager.close()
       }
