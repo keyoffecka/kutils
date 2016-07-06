@@ -4,9 +4,9 @@
   <name>utils</name>
   <description>Useful utilities missing in Kotlin stdlib or in JRE</description>
   <url>https://github.com/keyoffecka/kutils</url>
-  <groupId>net.ofk</groupId>
+  <groupId>net.offecka</groupId>
   <artifactId>kutils</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <packaging>jar</packaging>
 
   <licenses>
@@ -48,7 +48,7 @@
     <kotlin.plugin.version>${kotlin.version}</kotlin.plugin.version>
     <javadoc.plugin.version>2.3</javadoc.plugin.version>
     <source.plugin.version>3.0.1</source.plugin.version>
-    <dokka.plugin.version>0.9.5</dokka.plugin.version>
+    <dokka.plugin.version>0.9.8</dokka.plugin.version>
     <staging.plugin.version>1.6.3</staging.plugin.version>
     <gpg.plugin.version>1.5</gpg.plugin.version>
   </properties>
@@ -127,12 +127,6 @@
             <goals><goal>javadocJar</goal></goals>
           </execution>
         </executions>
-        <configuration>
-          <sources>
-            <source>src/main/java</source>
-            <source>src/main/kotlin</source>
-          </sources>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
