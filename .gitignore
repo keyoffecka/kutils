@@ -1,1 +1,5 @@
 target
+pom.xml
+build.xml
+build.properties
+build-local.properties

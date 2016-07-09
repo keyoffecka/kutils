@@ -68,12 +68,17 @@ class AutoTest {
       }
       Assert.fail()
     } catch(ex: IOException) {
-      Assert.assertArrayEquals(arrayOf<Throwable>(e2, e), JRE8Utils.getSuppressed(ex));
+      Assert.assertArrayEquals(arrayOf<Throwable>(e2, e), JRE8Utils.INSTANCE.getSuppressed(ex));
     }
 
     o = Mockito.inOrder(s, s2, s3)
     o.verify(s3).close()
     o.verify(s2).close()
     o.verify(s).close()
+
+    val ac = Auto.close {
+      (null as AutoCloseable?).open()
+    }
+    Assert.assertNull(ac);
   }
 }

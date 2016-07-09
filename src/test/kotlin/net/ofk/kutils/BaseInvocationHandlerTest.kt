@@ -13,7 +13,40 @@ class BaseInvocationHandlerTest {
     Assert.assertFalse(p.equals(Any()));
     Assert.assertTrue(p.equals(p));
     Assert.assertTrue(p.toString().isNotBlank());
+
+    try {
+      (p as C).equals()
+      Assert.fail()
+    } catch(e: UnsupportedOperationException) {
+      Assert.assertEquals("public abstract boolean net.ofk.kutils.C.equals()", e.message)
+    }
+
+    try {
+      (p as C).equals(1)
+      Assert.fail()
+    } catch(e: UnsupportedOperationException) {
+      Assert.assertEquals("public abstract java.lang.String net.ofk.kutils.C.equals(int)", e.message)
+    }
+
+    try {
+      (p as C).equals(1, 2)
+      Assert.fail()
+    } catch(e: UnsupportedOperationException) {
+      Assert.assertEquals("public abstract java.lang.String net.ofk.kutils.C.equals(int,long)", e.message)
+    }
+
+    try {
+      (p as C).m()
+      Assert.fail()
+    } catch(e: UnsupportedOperationException) {
+      Assert.assertEquals("public abstract java.lang.String net.ofk.kutils.C.m()", e.message)
+    }
   }
 }
 
-interface C
+interface C {
+  fun equals(): Boolean;
+  fun equals(a: Int): String;
+  fun equals(a: Int, b: Long): String;
+  fun m(): String;
+}

@@ -44,18 +44,15 @@ class Auto private constructor() {
   private fun close() {
     var exception: IOException? = null
 
-    try {
-      resources.reversed().forEach {
-        try {
-          it.close()
-        } catch (ex: Exception) {
-          exception = JRE8Utils.addSuppressed(exception ?: IOException(), ex)
-        }
+    for (it in resources.reversed()) {
+      try {
+        it.close()
+      } catch (ex: Exception) {
+        exception = JRE8Utils.INSTANCE.addSuppressed(exception ?: IOException(), ex)
       }
-    } finally {
-      if (exception != null) {
-        throw exception!!
-      }
+    }
+    if (exception != null) {
+      throw exception
     }
   }
 }
