@@ -34,8 +34,10 @@ class Auto private constructor() {
    * Registers an auto-closable resource of type T
    * within the current Auto.close block.
    */
-  fun <T : AutoCloseable> T.open(): T {
-    resources.add(this)
+  fun <T : AutoCloseable> T?.open(): T? {
+    if (this != null) {
+      resources.add(this)
+    }
     return this
   }
 
